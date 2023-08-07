@@ -9,6 +9,7 @@ export default function AppContextProvider({ children }) {
     const [search, setSearch] = useState("");
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
+    
 
     // videos search 
     async function searchVideo() {
@@ -34,6 +35,7 @@ export default function AppContextProvider({ children }) {
             console.log(response.data.items);
             setData(response.data.items);
             setLoading(false)
+            
         } catch (error) {
             alert(error);
             setLoading(false)
@@ -47,6 +49,7 @@ export default function AppContextProvider({ children }) {
     function submitHandler(e) {
         e.preventDefault();
         searchVideo();
+        
     }
     // time
     function getDaysAgo(publishedDate) {

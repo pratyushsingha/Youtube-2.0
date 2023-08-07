@@ -14,7 +14,6 @@ const Home = () => {
                         <VideoItems
                             src={item.snippet.thumbnails.high.url}
                             title={item.snippet.title}
-                            description={item.snippet.description}
                             channel={item.snippet.channelTitle}
                             date={item.snippet.publishedAt}
                             id={item.id.videoId}

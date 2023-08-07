@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+
 import { AppContext } from '../context/AppContext';
 
-const VideoItems = ({ src, title, channel, id, date }) => {
+const VideoItems = ({ src, title, channel, date }) => {
     const { getDaysAgo } = useContext(AppContext);
 
     return (
-        <a href={`https://www.youtube.com/watch?v=${id}`} target='_blank' rel='noreferrer'>
+        <Link to="/video">
             <div className="flex justify-center">
                 <div className="max-w-sm rounded-2xl overflow-hidden shadow-lg">
                     <img
@@ -24,7 +26,7 @@ const VideoItems = ({ src, title, channel, id, date }) => {
                     </div>
                 </div>
             </div>
-        </a>
+        </Link>
     );
 };
 
