@@ -1,6 +1,6 @@
 import Navbar from './components/Navbar';
 import Home from './components/Home';
-import Sidebar from './components/Sidebar';
+// import Sidebar from './components/Sidebar';
 
 
 
@@ -9,11 +9,11 @@ function App() {
     <>
 
       <Navbar />
-      <div className='flex space-x-6'>
+      {/* <div className='flex space-x-1'>
         <Sidebar />
         <Home />
-
-      </div>
+      </div> */}
+      <Home />
     </>
   );
 }
