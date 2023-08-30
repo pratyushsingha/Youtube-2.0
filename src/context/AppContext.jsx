@@ -89,6 +89,36 @@ export default function AppContextProvider({ children }) {
         suggestedVideo();
     }, []);
 
+    const tagsVideos = async (tags) => {
+
+        setLoading(true)
+        const options = {
+            method: 'GET',
+            url: 'https://youtube-v3-alternative.p.rapidapi.com/search',
+            params: {
+                query: tags,
+                geo: 'US',
+                lang: 'en'
+            },
+            headers: {
+                'X-RapidAPI-Key': '9ec25d2accmsha2f4b9a8bf1feccp12fd72jsn7fa8b52e09eb',
+                'X-RapidAPI-Host': 'youtube-v3-alternative.p.rapidapi.com'
+            }
+        };
+
+        try {
+            const response = await axios.request(options);
+            console.log(response.data.data);
+            setData(response.data.data);
+            setLoading(false);
+
+        } catch (error) {
+            toast.error(error);
+            setLoading(false);
+            setData([]);
+        }
+    }
+
     const value = {
         search,
         setSearch,
@@ -102,7 +132,8 @@ export default function AppContextProvider({ children }) {
         setSelected,
         changeHandler,
         submitHandler,
-        suggestedVideo
+        suggestedVideo,
+        tagsVideos
 
     }
 
