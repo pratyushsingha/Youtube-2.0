@@ -1,14 +1,25 @@
-import React from 'react'
+import React, { useContext } from 'react';
+
+import { categories } from '../utils/tags';
+import { AppContext } from '../context/AppContext';
 
 const Sidebar = () => {
+
+    const { selected, setSelected } = useContext(AppContext);
+
     return (
         <div className='hidden md:block ml-1 mr-3 mt-3'>
-            <div className='flex items-center rounded-xl justify-center bg-white-500 text-black text-xl py-3 px-6 font-bold font-sarif hover:bg-red-600 hover:text-white cursor-pointer'>
-                <p>javascript</p>
-            </div>
-            
+            {categories.map((category, index) => {
+                return (
+                    <button key={index} className={`flex items-center rounded-xl justify-center bg-white-500 text-black py-3 px-6 font-semibold font-sarif hover:bg-red-600 hover:text-white cursor-pointer`}>
+                        {category.name}
+                    </button>
+                )
+            })
+            }
+
         </div>
-        
+
     )
 }
 

@@ -1,15 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { AppContext } from '../context/AppContext';
+// import { AppContext } from '../context/AppContext';
 
 const VideoItems = ({ src, title, channel, date }) => {
-    const { getDaysAgo } = useContext(AppContext);
 
     return (
         <Link to="/video">
             <div className="flex justify-center">
-                <div className="max-w-sm rounded-2xl overflow-hidden shadow-lg">
+                <div className="max-w-sm rounded-xl overflow-hidden shadow-lg">
                     <img
                         className="w-full rounded-3xl"
                         src={src}
@@ -21,7 +20,7 @@ const VideoItems = ({ src, title, channel, date }) => {
                             {channel}
                         </p>
                         <p className='text-gray-700 text-base'>
-                            {getDaysAgo(date) === 0 ? "Today" : getDaysAgo(date) + " days ago"}
+                            {date}
                         </p>
                     </div>
                 </div>

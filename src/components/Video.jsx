@@ -2,14 +2,14 @@ import React, { useContext } from 'react'
 import { AppContext } from '../context/AppContext';
 
 const Video = ({ title, id }) => {
-    const { data } = useContext(AppContext)
+    const { vId } = useContext(AppContext)
 
     return (
         <>
             <div className='mx-3 my-4'>
                 <iframe
                     className="hidden md:block w-8/12 rounded-md"
-                    src={`https://www.youtube.com/embed/M0JIy8sMN4A`}
+                    src={`https://www.youtube.com/embed/${vId}`}
                     title={title}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
@@ -17,7 +17,7 @@ const Video = ({ title, id }) => {
                 />
                  <iframe
                     className="block md:hidden w-full rounded-md"
-                    src={`https://www.youtube.com/embed/M0JIy8sMN4A`}
+                    src={`https://www.youtube.com/embed/${vId}`}
                     title={title}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
