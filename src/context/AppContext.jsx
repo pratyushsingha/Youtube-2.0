@@ -12,6 +12,7 @@ export default function AppContextProvider({ children }) {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [selected, setSelected] = useState("");
+    const [vDetails, setVDetails] = useState([]);
 
 
     // videos search 
@@ -33,7 +34,6 @@ export default function AppContextProvider({ children }) {
 
         try {
             const response = await axios.request(options);
-            console.log(response.data.data);
             setData(response.data.data);
             setLoading(false);
 
@@ -71,9 +71,8 @@ export default function AppContextProvider({ children }) {
 
         try {
             const response = await axios.request(options);
-            console.log(response.data.data);
             setData(response.data.data);
-            console.log(response.data.data.map(video => (video.videoId)))
+            // console.log(response.data.data.map(video => (video.videoId)))
             setLoading(false);
         } catch (error) {
             toast.error("unable to fetch the data");
@@ -105,7 +104,6 @@ export default function AppContextProvider({ children }) {
 
         try {
             const response = await axios.request(options);
-            console.log(response.data.data);
             setData(response.data.data);
             setLoading(false);
 
@@ -125,6 +123,8 @@ export default function AppContextProvider({ children }) {
         setLoading,
         selected,
         setSelected,
+        vDetails,
+        setVDetails,
         changeHandler,
         submitHandler,
         suggestedVideo,
