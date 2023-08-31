@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
-import Video from './Video';
+import { Link } from 'react-router-dom';
 
 const VideoItems = ({ src, title, channel, date, id }) => {
 

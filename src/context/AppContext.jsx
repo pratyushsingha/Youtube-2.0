@@ -2,6 +2,7 @@ import { useState, useEffect, createContext } from 'react';
 
 import axios from 'axios'
 import { toast } from 'react-hot-toast';
+const apiKey = process.env.REACT_APP_API_KEY;
 
 export const AppContext = createContext();
 
@@ -75,8 +76,8 @@ export default function AppContextProvider({ children }) {
             console.log(response.data.data.map(video => (video.videoId)))
             setLoading(false);
         } catch (error) {
-            console.error(error);
-            setLoading(false)
+            toast.error("unable to fetch the data");
+            setLoading(false);
             setData([]);
         }
     }

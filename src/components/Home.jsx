@@ -10,7 +10,7 @@ const Home = () => {
 
     return (
         <div className='flex flex-col md:flex-row md:justify-between md:mx-10'>
-            <div className='overflow-x-auto md:overflow-y-auto md:h-screen md:scrollbar md:scrollbar-thin scrollbar-thumb-red-400'>
+            <div className='overflow-x-auto md:overflow-y-auto md:h-screen md:scrollbar md:scrollbar-thin scrollbar-thumb-gray-300'>
                 <Sidebar />
             </div>
             {loading && <Spinner />}

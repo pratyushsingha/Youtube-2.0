@@ -2,8 +2,14 @@ import React, { useContext } from 'react'
 import { AppContext } from '../context/AppContext';
 import { useParams } from 'react-router-dom';
 
-const Video = ({ title}) => {
+const Video = ({ title }) => {
     const { vId } = useParams();
+
+    const videoDetails = () => {
+
+    }
+
+
     return (
         <>
             <div className='mx-3 my-4'>
