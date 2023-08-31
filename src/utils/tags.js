@@ -30,5 +30,5 @@ export const categories = [
   { name: 'Beauty'},
   { name: 'Comedy'},
   { name: 'Gym'},
-  { name: 'bollywood'}
+  { name: 'bollywood'},
 ];

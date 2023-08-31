@@ -8,9 +8,9 @@ const VideoItems = ({ src, title, channel, date }) => {
     return (
         <Link to="/video">
             <div className="flex justify-center">
-                <div className="max-w-sm rounded-xl overflow-hidden shadow-lg">
+                <div className="max-w-sm rounded-lg overflow-hidden shadow-lg">
                     <img
-                        className="w-full rounded-3xl"
+                        className="w-full rounded-lg"
                         src={src}
                         alt={title}
                     />
