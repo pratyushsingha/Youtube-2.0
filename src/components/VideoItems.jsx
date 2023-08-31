@@ -1,12 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import Video from './Video';
 
-// import { AppContext } from '../context/AppContext';
-
-const VideoItems = ({ src, title, channel, date }) => {
+const VideoItems = ({ src, title, channel, date, id }) => {
 
     return (
-        <Link to="/video">
+        <Link to={`/video/${id}`}>
             <div className="flex justify-center">
                 <div className="max-w-sm rounded-lg overflow-hidden shadow-lg">
                     <img

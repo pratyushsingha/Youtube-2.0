@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import { AppContext } from '../context/AppContext';
+import { useParams } from 'react-router-dom';
 
-const Video = ({ title, id }) => {
-    const { vId } = useContext(AppContext)
-
+const Video = ({ title}) => {
+    const { vId } = useParams();
     return (
         <>
             <div className='mx-3 my-4'>
@@ -15,7 +15,7 @@ const Video = ({ title, id }) => {
                     allowFullScreen
                     height={500}
                 />
-                 <iframe
+                <iframe
                     className="block md:hidden w-full rounded-md"
                     src={`https://www.youtube.com/embed/${vId}`}
                     title={title}

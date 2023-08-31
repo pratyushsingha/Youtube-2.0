@@ -1,7 +1,5 @@
 import { useState, useEffect, createContext } from 'react';
 
-import { categories } from '../utils/tags';
-
 import axios from 'axios'
 import { toast } from 'react-hot-toast';
 
@@ -12,8 +10,7 @@ export default function AppContextProvider({ children }) {
     const [search, setSearch] = useState("");
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [vId, setVId] = useState("");
-    const [selected, setSelected] = useState(categories.map(category => category.name));
+    const [selected, setSelected] = useState("");
 
 
     // videos search 
@@ -75,7 +72,6 @@ export default function AppContextProvider({ children }) {
             const response = await axios.request(options);
             console.log(response.data.data);
             setData(response.data.data);
-            setVId(response.data.data.map(video => (video.videoId)));
             console.log(response.data.data.map(video => (video.videoId)))
             setLoading(false);
         } catch (error) {
@@ -126,8 +122,6 @@ export default function AppContextProvider({ children }) {
         setData,
         loading,
         setLoading,
-        vId,
-        setVId,
         selected,
         setSelected,
         changeHandler,
