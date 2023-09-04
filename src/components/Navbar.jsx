@@ -6,7 +6,7 @@ const Navbar = () => {
     const { changeHandler, submitHandler, search } = useContext(AppContext);
 
     return (
-        <div className="sticky top-0 bg-white flex justify-between py-4 mx-5">
+        <div className="sticky top-0 bg-white flex justify-between py-4 px-5">
             <a href="/">
                 <div className="flex space-x-3">
                     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="48" height="48" viewBox="0 0 512 512">

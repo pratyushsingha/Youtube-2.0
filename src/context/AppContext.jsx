@@ -13,6 +13,10 @@ export default function AppContextProvider({ children }) {
     const [loading, setLoading] = useState(false);
     const [selected, setSelected] = useState("");
     const [vDetails, setVDetails] = useState([]);
+    const [subscribed, setSubscribed] = useState(false);
+    const [liked, setLiked] = useState(false);
+    const [disLiked, setDisLiked] = useState(false);
+    const [rVideos, setRVideos] = useState([]);
 
 
     // videos search 
@@ -114,6 +118,25 @@ export default function AppContextProvider({ children }) {
         }
     }
 
+    const subscription = () => {
+        if (subscribed === false) {
+            setSubscribed(true);
+        } else {
+            setSubscribed(false);
+        }
+    }
+
+    const videoLike = () => {
+        if (liked === false) {
+            setLiked(true);
+            setDisLiked(false);
+        }
+        else {
+            setLiked(false);
+            setDisLiked(true);
+        }
+    }
+
     const value = {
         search,
         setSearch,
@@ -125,10 +148,20 @@ export default function AppContextProvider({ children }) {
         setSelected,
         vDetails,
         setVDetails,
+        subscribed,
+        setSubscribed,
+        liked,
+        setLiked,
+        disLiked,
+        setDisLiked,
+        rVideos,
+        setRVideos,
         changeHandler,
         submitHandler,
         suggestedVideo,
-        tagsVideos
+        tagsVideos,
+        subscription,
+        videoLike,
 
     }
 
