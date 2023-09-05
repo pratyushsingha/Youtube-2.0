@@ -1,18 +1,80 @@
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
 
-const VideoContainer = ({ id, title, thumbnail,channelTitle,viewCount,channelThumbnail,publishedTimeText }) => {
+const VideoContainer = ({
+  id,
+  title,
+  thumbnail,
+  channelTitle,
+  viewCount,
+  channelThumbnail,
+  publishedTimeText,
+}) => {
   return (
-    <div key={id} className='flex space-x-3'>
-      <img src={thumbnail} alt="" />
-      <p>{title}</p>
-      <div>
-      <p>{channelTitle}</p>
-      <p>{viewCount}</p>
-      <img src={channelThumbnail} alt="" />
-      <p>{publishedTimeText}</p>
-      </div>
-    </div>
-  )
-}
+    <>
+      <Link to={`/video/${id}`}>
+        {/* for small screen */}
+        <div key={id} className="block md:hidden flex flex-col space-y-2">
+          <img className="w-full" src={thumbnail} alt="" />
+          <div className="flex space-x-2">
+            <img
+              className="w-10 h-10 rounded-full mt-2"
+              src={channelThumbnail}
+              alt=""
+            />
+            <p className="font-bold text-lg">{title}</p>
+          </div>
+          <div className="flex gap-1 mx-10 -mt-3">
+            <p className="text-sm text-gray-600 font-semibold">
+              {channelTitle}
+            </p>
+            <span>•</span>
+            <p>{viewCount}</p>
+            <span>•</span>
+            <p>{publishedTimeText}</p>
+          </div>
+        </div>
+        {/* <div className="flex flex-col">
+          <div className="flex">
+            <img className="w-1/2" src={thumbnail} alt="" />
+            <p className="font-bold text-lg">{title}</p>
+          </div>
+          <div>
+            <div className="flex space-x-2">
+              <img
+                className="w-10 h-10 rounded-full mt-2"
+                src={channelThumbnail}
+                alt=""
+              />
+            </div>
+            <div className="flex gap-1 mx-10 -mt-3">
+              <p className="text-sm text-gray-600 font-semibold">
+                {channelTitle}
+              </p>
+              <span>•</span>
+              <p>{viewCount}</p>
+              <span>•</span>
+              <p>{publishedTimeText}</p>
+            </div>
+          </div> */}
+        {/* </div> */}
+        <div className="hidden md:block flex flex-col space-y-2">
+          <div className="flex space-x-3">
+            <img className="w-1/2" src={thumbnail} alt="" />
+            <div className="flex flex-col">
+              <p className="font-bold text-base">{title.slice(0, 56)}...</p>
+              <p className="text-sm text-gray-600">{channelTitle}</p>
+              <div className="flex space-x-2">
+                <span>{viewCount}</span>
+                <span>•</span>
+                <span>{publishedTimeText}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Link>
+    </>
+  );
+};
 
 export default VideoContainer;

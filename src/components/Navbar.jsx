@@ -1,9 +1,7 @@
-import { useContext } from "react"
-import { AppContext } from "../context/AppContext";
 
-const Navbar = () => {
 
-    const { changeHandler, submitHandler, search } = useContext(AppContext);
+const Navbar = ({changeHandler, submitHandler, search}) => {
+
 
     return (
         <div className="sticky top-0 bg-white flex justify-between py-4 px-5">
