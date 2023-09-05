@@ -28,7 +28,7 @@ export default function AppContextProvider({ children }) {
         lang: "en",
       },
       headers: {
-        "X-RapidAPI-Key": "59ef98e221msh53666d7bc9fb920p19d9cejsn064c8838563e",
+        "X-RapidAPI-Key": "9ec25d2accmsha2f4b9a8bf1feccp12fd72jsn7fa8b52e09eb",
         "X-RapidAPI-Host": "youtube-v3-alternative.p.rapidapi.com",
       },
     };
@@ -63,7 +63,7 @@ export default function AppContextProvider({ children }) {
         lang: "en",
       },
       headers: {
-        "X-RapidAPI-Key": "59ef98e221msh53666d7bc9fb920p19d9cejsn064c8838563e",
+        "X-RapidAPI-Key": "9ec25d2accmsha2f4b9a8bf1feccp12fd72jsn7fa8b52e09eb",
         "X-RapidAPI-Host": "youtube-v3-alternative.p.rapidapi.com",
       },
     };
@@ -94,7 +94,7 @@ export default function AppContextProvider({ children }) {
         lang: "en",
       },
       headers: {
-        "X-RapidAPI-Key": "59ef98e221msh53666d7bc9fb920p19d9cejsn064c8838563e",
+        "X-RapidAPI-Key": "9ec25d2accmsha2f4b9a8bf1feccp12fd72jsn7fa8b52e09eb",
         "X-RapidAPI-Host": "youtube-v3-alternative.p.rapidapi.com",
       },
     };
@@ -134,7 +134,7 @@ export default function AppContextProvider({ children }) {
       url: "https://youtube-v3-alternative.p.rapidapi.com/video",
       params: { id: videoId },
       headers: {
-        "X-RapidAPI-Key": "59ef98e221msh53666d7bc9fb920p19d9cejsn064c8838563e",
+        "X-RapidAPI-Key": "9ec25d2accmsha2f4b9a8bf1feccp12fd72jsn7fa8b52e09eb",
         "X-RapidAPI-Host": "youtube-v3-alternative.p.rapidapi.com",
       },
     };
@@ -158,7 +158,7 @@ export default function AppContextProvider({ children }) {
         lang: "en",
       },
       headers: {
-        "X-RapidAPI-Key": "59ef98e221msh53666d7bc9fb920p19d9cejsn064c8838563e",
+        "X-RapidAPI-Key": "9ec25d2accmsha2f4b9a8bf1feccp12fd72jsn7fa8b52e09eb",
         "X-RapidAPI-Host": "youtube-v3-alternative.p.rapidapi.com",
       },
     };
