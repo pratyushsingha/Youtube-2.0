@@ -54,7 +54,7 @@ const Video = ({ title }) => {
             </div>
             <button
               onClick={subscription}
-              className="font-bold text-base bg-gray-400 px-8 py-1 rounded-3xl"
+              className="font-bold text-sm md:text-base bg-gray-400 px-4 md:px-8 py-1 rounded-3xl"
             >
               <ToastContainer />
               {subscribed ? (

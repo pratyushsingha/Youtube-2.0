@@ -4,12 +4,21 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import AppContextProvider from './context/AppContext';
+import { Auth0Provider } from '@auth0/auth0-react';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <AppContextProvider>
-    <App />
-  </AppContextProvider>
+  <Auth0Provider
+    domain="dev-qnsirgiedao7vvyz.au.auth0.com"
+    clientId="t4QjpiqYQjazZR4fSaYCOUxVnIiN9yIT"
+    authorizationParams={{
+      redirect_uri: window.location.origin
+    }}
+  >
+    <AppContextProvider>
+      <App />
+    </AppContextProvider>
+  </Auth0Provider>,
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -230,6 +230,8 @@ export default function AppContextProvider({ children }) {
     }
   };
 
+ 
+
   const value = {
     search,
     setSearch,

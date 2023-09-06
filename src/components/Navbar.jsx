@@ -1,9 +1,21 @@
-import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
 import { AppContext } from "../context/AppContext";
 
+import { Link } from "react-router-dom";
+import { BiUserCircle } from "react-icons/bi";
+import {AiOutlineSearch} from 'react-icons/ai'
+import { useAuth0 } from "@auth0/auth0-react";
+
 const Navbar = () => {
+  const [showLogoutBox, setShowLogoutBox] = useState(false);
+
   const { changeHandler, submitHandler, search } = useContext(AppContext);
+
+  const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
+
+  const handleLogout = () => {
+    logout();
+  };
 
   return (
     <div className="sticky top-0 bg-white flex justify-between py-4 px-5">
@@ -39,48 +51,50 @@ const Navbar = () => {
           </h1>
         </div>
       </Link>
-      <div className="flex space-x-2">
+      <div className="flex">
         <input
           type="text"
           value={search}
           onChange={changeHandler}
-          className="d-inline-block w-full d-lg-none flex-order-1 f5 no-underline border color-border-default bg-inherit rounded-2 px-5 py-1 color-fg-inherit text-black rounded-3xl"
+          className="md:w-96 border focus:border-blue-700 px-4 py-2 border rounded-l-3xl"
           placeholder="search"
         />
-        <svg
-          className="cursor-pointer"
-          onClick={submitHandler}
-          xmlns="http://www.w3.org/2000/svg"
-          x="0px"
-          y="0px"
-          width="48"
-          height="48"
-          viewBox="0 0 48 48"
-        >
-          <path
-            fill="#616161"
-            d="M34.6 28.1H38.6V45.1H34.6z"
-            transform="rotate(-45.001 36.586 36.587)"
-          ></path>
-          <path
-            fill="#616161"
-            d="M20 4A16 16 0 1 0 20 36A16 16 0 1 0 20 4Z"
-          ></path>
-          <path
-            fill="#37474F"
-            d="M36.2 32.1H40.2V44.400000000000006H36.2z"
-            transform="rotate(-45.001 38.24 38.24)"
-          ></path>
-          <path
-            fill="#64B5F6"
-            d="M20 7A13 13 0 1 0 20 33A13 13 0 1 0 20 7Z"
-          ></path>
-          <path
-            fill="#BBDEFB"
-            d="M26.9,14.2c-1.7-2-4.2-3.2-6.9-3.2s-5.2,1.2-6.9,3.2c-0.4,0.4-0.3,1.1,0.1,1.4c0.4,0.4,1.1,0.3,1.4-0.1C16,13.9,17.9,13,20,13s4,0.9,5.4,2.5c0.2,0.2,0.5,0.4,0.8,0.4c0.2,0,0.5-0.1,0.6-0.2C27.2,15.3,27.2,14.6,26.9,14.2z"
-          ></path>
-        </svg>
+        <button onClick={submitHandler}>
+          <div className="bg-gray-300 rounded-r-3xl self-center px-6 py-3.5">
+          <AiOutlineSearch className="w-5 h-5" />
+          </div>
+        </button>
       </div>
+      {!isAuthenticated ? (
+        <button
+          onClick={() => loginWithRedirect()}
+          className="flex space-x-2 self-center bg-white border border-black hover:border-gray-500 rounded-full px-3 py-2 text-blue-900"
+        >
+          <BiUserCircle className="w-7 h-7" />{" "}
+          <p className="text-blue-900 font-semibold">Sign in</p>
+        </button>
+      ) : (
+        <div className="relative">
+          <img
+            onClick={() => setShowLogoutBox(!showLogoutBox)}
+            className="w-10 h-10 rounded-full cursor-pointer"
+            src={user.picture}
+            alt={user.name}
+          />
+          {showLogoutBox && (
+            <div className="absolute top-12 right-0 bg-white border border-gray-300 rounded-lg shadow-lg px-10 pt-3 pb-2">
+              <p className="w-full text-semibold">👋 {user.name}</p>
+              <hr />
+              <p
+                onClick={handleLogout}
+                className="text-red-500 cursor-pointer font-semibold"
+              >
+                Logout
+              </p>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };
