@@ -1,8 +1,8 @@
 import { useState, useEffect, createContext } from "react";
 
 import axios from "axios";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const AppContext = createContext();
 
@@ -16,9 +16,26 @@ export default function AppContextProvider({ children }) {
   const [liked, setLiked] = useState(false);
   const [disLiked, setDisLiked] = useState(false);
   const [rVideos, setRVideos] = useState([]);
+  const [currentVideoTitle, setCurrentVideoTitle] = useState("");
+  const [currentVideoChannel, setCurrentVideoChannel]=useState("");
+  const [currentVideoViews, setCurrentVideoViews]=useState("");
 
   // videos search
   const searchVideo = async () => {
+    if (search.trim() === "") {
+      toast.error("Search field can't be empty😢", {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      return;
+    }
+
     setLoading(true);
     const options = {
       method: "GET",
@@ -39,7 +56,16 @@ export default function AppContextProvider({ children }) {
       setData(response.data.data);
       setLoading(false);
     } catch (error) {
-      // toast.error(error);
+      toast.error("Failed to search the video😢", {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
       setLoading(false);
       setData([]);
     }
@@ -74,7 +100,7 @@ export default function AppContextProvider({ children }) {
       setData(response.data.data);
       setLoading(false);
     } catch (error) {
-      toast.error('Failed to Fetch The Data😢', {
+      toast.error("Failed to Fetch The Data😢", {
         position: "bottom-left",
         autoClose: 5000,
         hideProgressBar: false,
@@ -83,7 +109,7 @@ export default function AppContextProvider({ children }) {
         draggable: true,
         progress: undefined,
         theme: "dark",
-        });
+      });
       setLoading(false);
       setData([]);
     }
@@ -123,19 +149,7 @@ export default function AppContextProvider({ children }) {
   const subscription = () => {
     if (subscribed === false) {
       setSubscribed(true);
-        toast.error('Subscription Removed😢', {
-          position: "bottom-left",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          });
-    } else {
-      setSubscribed(false);
-      toast.success('Subscription Added😁', {
+      toast.error("Subscription Removed😢", {
         position: "bottom-left",
         autoClose: 5000,
         hideProgressBar: false,
@@ -144,7 +158,19 @@ export default function AppContextProvider({ children }) {
         draggable: true,
         progress: undefined,
         theme: "light",
-        });
+      });
+    } else {
+      setSubscribed(false);
+      toast.success("Subscription Added😁", {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
 
@@ -158,7 +184,7 @@ export default function AppContextProvider({ children }) {
     }
   };
 
-  const videoDetails = async (videoId) => {
+  const videoDetails = async (videoId, videoTitle, videoChannel, videoViews) => {
     const options = {
       method: "GET",
       url: "https://youtube-v3-alternative.p.rapidapi.com/video",
@@ -170,8 +196,10 @@ export default function AppContextProvider({ children }) {
     };
     try {
       const response = await axios.request(options);
-      console.log(response.data);
       setVDetails(response.data);
+      setCurrentVideoTitle(videoTitle);
+      setCurrentVideoChannel(videoChannel);
+      setCurrentVideoViews(videoViews);
     } catch (error) {
       console.error(error);
       setVDetails([]);
@@ -229,6 +257,10 @@ export default function AppContextProvider({ children }) {
     videoLike,
     relatedVideos,
     videoDetails,
+    currentVideoTitle,
+    setCurrentVideoTitle,
+    currentVideoChannel,
+    currentVideoViews
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

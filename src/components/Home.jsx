@@ -6,7 +6,7 @@ import Sidebar from './Sidebar';
 
 const Home = () => {
 
-    const { data, loading } = useContext(AppContext);
+    const { data, loading,videoDetails } = useContext(AppContext);
 
     return (
         <div className='flex flex-col md:flex-row md:justify-between md:mx-10'>

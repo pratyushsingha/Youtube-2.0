@@ -6,7 +6,7 @@ import { ToastContainer } from "react-toastify";
 import { AppContext } from "../context/AppContext";
 import VideoContainer from "./VideoContainer";
 
-const Video = ({title}) => {
+const Video = ({ title }) => {
   const {
     vDetails,
     subscribed,
@@ -14,12 +14,15 @@ const Video = ({title}) => {
     rVideos,
     relatedVideos,
     videoDetails,
+    currentVideoTitle,
+    currentVideoViews,
+    currentVideoChannel
   } = useContext(AppContext);
 
   const { vId } = useParams();
 
   useEffect(() => {
-    videoDetails(vId);
+    videoDetails(vId, currentVideoTitle, currentVideoChannel, currentVideoViews);
     relatedVideos(vId);
   }, []);
 
@@ -66,18 +69,20 @@ const Video = ({title}) => {
           </div> */}
         </div>
       </div>
-      <div className="flex flex-col md:flex-col space-y-2">
+      <div className="flex flex-col space-y-2">
         {rVideos.map((rvideo, index) => (
-          <VideoContainer
-            key={index}
-            title={rvideo.title}
-            id={rvideo.videoId}
-            thumbnail={rvideo.thumbnail[0].url}
-            channelTitle={rvideo.channelTitle}
-            viewCount={rvideo.viewCount}
-            channelThumbnail={rvideo.authorThumbnail[0].url}
-            publishedTimeText={rvideo.publishedTimeText}
-          />
+          <div key={index}  onClick={() => videoDetails(rvideo.videoId, rvideo.title, rvideo.channelTitle, rvideo.viewCount)} className="flex flex-col md:flex-col space-y-2 ">
+            <VideoContainer
+              key={index}
+              title={rvideo.title}
+              id={rvideo.videoId}
+              thumbnail={rvideo.thumbnail[0].url}
+              channelTitle={rvideo.channelTitle}
+              viewCount={rvideo.viewCount}
+              channelThumbnail={rvideo.authorThumbnail[0].url}
+              publishedTimeText={rvideo.publishedTimeText}
+            />
+          </div>
         ))}
       </div>
     </div>
