@@ -3,22 +3,27 @@ import { AppContext } from "../context/AppContext";
 
 import { Link } from "react-router-dom";
 import { BiUserCircle } from "react-icons/bi";
-import {AiOutlineSearch} from 'react-icons/ai'
+import { AiOutlineSearch } from "react-icons/ai";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const Navbar = () => {
   const [showLogoutBox, setShowLogoutBox] = useState(false);
+  const [expandSearch, setExpandSearch] = useState(false);
 
   const { changeHandler, submitHandler, search } = useContext(AppContext);
 
   const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
+
+  const togleSearch = () => {
+    setExpandSearch(!expandSearch);
+  };
 
   const handleLogout = () => {
     logout();
   };
 
   return (
-    <div className="sticky top-0 bg-white flex justify-between py-4 px-5">
+    <div className="sticky top-0 bg-white flex justify-between py-4 px-5" onClick={togleSearch}>
       <Link to="/">
         <div className="flex space-x-3">
           <svg
@@ -56,45 +61,51 @@ const Navbar = () => {
           type="text"
           value={search}
           onChange={changeHandler}
-          className="md:w-96 border focus:border-blue-700 px-4 py-2 border rounded-l-3xl"
+          className={`${
+            expandSearch ? "w-12/12" : "w-20"
+          } md:w-96 border focus:border-blue-700 px-4 py-2 border rounded-l-3xl`}
           placeholder="search"
         />
-        <button onClick={submitHandler}>
+        <button
+          onClick={submitHandler}
+        >
           <div className="bg-gray-300 rounded-r-3xl self-center px-6 py-3.5">
-          <AiOutlineSearch className="w-5 h-5" />
+            <AiOutlineSearch className="w-5 h-5" />
           </div>
         </button>
       </div>
-      {!isAuthenticated ? (
-        <button
-          onClick={() => loginWithRedirect()}
-          className="flex space-x-2 self-center bg-white border border-black hover:border-gray-500 rounded-full px-3 py-2 text-blue-900"
-        >
-          <BiUserCircle className="w-7 h-7" />{" "}
-          <p className="text-blue-900 font-semibold">Sign in</p>
-        </button>
-      ) : (
-        <div className="relative">
-          <img
-            onClick={() => setShowLogoutBox(!showLogoutBox)}
-            className="w-10 h-10 rounded-full cursor-pointer"
-            src={user.picture}
-            alt={user.name}
-          />
-          {showLogoutBox && (
-            <div className="absolute top-12 right-0 bg-white border border-gray-300 rounded-lg shadow-lg px-10 pt-3 pb-2">
-              <p className="w-full text-semibold">👋 {user.name}</p>
-              <hr />
-              <p
-                onClick={handleLogout}
-                className="text-red-500 cursor-pointer font-semibold"
-              >
-                Logout
-              </p>
-            </div>
-          )}
-        </div>
-      )}
+      <div className={`${expandSearch?"hidden":"block"}`}>
+        {!isAuthenticated ? (
+          <button
+            onClick={() => loginWithRedirect()}
+            className="flex space-x-2 self-center bg-white border border-black hover:border-gray-500 rounded-full px-3 py-2 text-blue-900"
+          >
+            <BiUserCircle className="w-7 h-7" />{" "}
+            <p className="text-blue-900 font-semibold">Sign in</p>
+          </button>
+        ) : (
+          <div className="relative">
+            <img
+              onClick={() => setShowLogoutBox(!showLogoutBox)}
+              className="w-10 h-10 rounded-full cursor-pointer"
+              src={user.picture}
+              alt={user.name}
+            />
+            {showLogoutBox && (
+              <div className="absolute top-12 right-0 bg-white border border-gray-300 rounded-lg shadow-lg px-10 pt-3 pb-2">
+                <p className="w-full text-semibold">👋 {user.name}</p>
+                <hr />
+                <p
+                  onClick={handleLogout}
+                  className="text-red-500 cursor-pointer font-semibold"
+                >
+                  Logout
+                </p>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
