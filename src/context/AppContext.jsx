@@ -1,7 +1,8 @@
 import { useState, useEffect, createContext } from "react";
+
 import axios from "axios";
-import { toast } from "react-hot-toast";
-const apiKey = process.env.REACT_APP_API_KEY;
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const AppContext = createContext();
 
@@ -28,7 +29,7 @@ export default function AppContextProvider({ children }) {
         lang: "en",
       },
       headers: {
-        "X-RapidAPI-Key": "9ec25d2accmsha2f4b9a8bf1feccp12fd72jsn7fa8b52e09eb",
+        "X-RapidAPI-Key": process.env.REACT_APP_API_KEY,
         "X-RapidAPI-Host": "youtube-v3-alternative.p.rapidapi.com",
       },
     };
@@ -38,7 +39,7 @@ export default function AppContextProvider({ children }) {
       setData(response.data.data);
       setLoading(false);
     } catch (error) {
-      toast.error(error);
+      // toast.error(error);
       setLoading(false);
       setData([]);
     }
@@ -63,7 +64,7 @@ export default function AppContextProvider({ children }) {
         lang: "en",
       },
       headers: {
-        "X-RapidAPI-Key": "9ec25d2accmsha2f4b9a8bf1feccp12fd72jsn7fa8b52e09eb",
+        "X-RapidAPI-Key": process.env.REACT_APP_API_KEY,
         "X-RapidAPI-Host": "youtube-v3-alternative.p.rapidapi.com",
       },
     };
@@ -73,7 +74,16 @@ export default function AppContextProvider({ children }) {
       setData(response.data.data);
       setLoading(false);
     } catch (error) {
-      toast.error("unable to fetch the data");
+      toast.error('Failed to Fetch The Data😢', {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
       setLoading(false);
       setData([]);
     }
@@ -94,7 +104,7 @@ export default function AppContextProvider({ children }) {
         lang: "en",
       },
       headers: {
-        "X-RapidAPI-Key": "9ec25d2accmsha2f4b9a8bf1feccp12fd72jsn7fa8b52e09eb",
+        "X-RapidAPI-Key": process.env.REACT_APP_API_KEY,
         "X-RapidAPI-Host": "youtube-v3-alternative.p.rapidapi.com",
       },
     };
@@ -104,7 +114,7 @@ export default function AppContextProvider({ children }) {
       setData(response.data.data);
       setLoading(false);
     } catch (error) {
-      toast.error(error);
+      // toast.error(error);
       setLoading(false);
       setData([]);
     }
@@ -113,8 +123,28 @@ export default function AppContextProvider({ children }) {
   const subscription = () => {
     if (subscribed === false) {
       setSubscribed(true);
+        toast.error('Subscription Removed😢', {
+          position: "bottom-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
     } else {
       setSubscribed(false);
+      toast.success('Subscription Added😁', {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     }
   };
 
@@ -134,7 +164,7 @@ export default function AppContextProvider({ children }) {
       url: "https://youtube-v3-alternative.p.rapidapi.com/video",
       params: { id: videoId },
       headers: {
-        "X-RapidAPI-Key": "9ec25d2accmsha2f4b9a8bf1feccp12fd72jsn7fa8b52e09eb",
+        "X-RapidAPI-Key": process.env.REACT_APP_API_KEY,
         "X-RapidAPI-Host": "youtube-v3-alternative.p.rapidapi.com",
       },
     };
@@ -158,7 +188,7 @@ export default function AppContextProvider({ children }) {
         lang: "en",
       },
       headers: {
-        "X-RapidAPI-Key": "9ec25d2accmsha2f4b9a8bf1feccp12fd72jsn7fa8b52e09eb",
+        "X-RapidAPI-Key": process.env.REACT_APP_API_KEY,
         "X-RapidAPI-Host": "youtube-v3-alternative.p.rapidapi.com",
       },
     };

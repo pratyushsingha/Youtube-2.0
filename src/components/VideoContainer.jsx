@@ -22,7 +22,7 @@ const VideoContainer = ({
               src={channelThumbnail}
               alt=""
             />
-            <p className="font-bold text-lg">{title}</p>
+            <p className="font-bold text-md">{title.slice(0,56)} ...</p>
           </div>
           <div className="flex gap-1 mx-10 -mt-3">
             <p className="text-sm text-gray-600 font-semibold">

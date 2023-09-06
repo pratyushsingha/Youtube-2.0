@@ -1,21 +1,22 @@
 import React, { useContext } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AppContext } from "./context/AppContext";
+
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Video from './components/Video';
+import Channel from './components/Channel';
 
 function App() {
-  const { changeHandler, submitHandler, search } = useContext(AppContext);
-
   return (
     <Router>
       <>
-        <Navbar changeHandler={changeHandler} submitHandler={submitHandler} search={search}/>
+        <Navbar/>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/video/:vId" element={<Video />} />
+          <Route path="/channel/:cId" element={<Channel />} />
         </Routes>
       </>
     </Router>

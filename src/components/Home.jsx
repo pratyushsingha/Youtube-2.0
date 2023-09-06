@@ -23,6 +23,7 @@ const Home = () => {
                             channel={item.channelTitle}
                             date={item.publishedText}
                             id={item.videoId}
+                            desc={item.description}
                         />
                     </div>
                 )))}
