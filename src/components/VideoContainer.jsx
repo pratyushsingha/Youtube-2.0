@@ -24,7 +24,7 @@ const VideoContainer = ({
             />
             <p className="font-bold text-md">{title.slice(0,56)} ...</p>
           </div>
-          <div className="flex gap-1 mx-10 -mt-3">
+          <div className="flex gap-1 mx-10 -mt-3 w-full">
             <p className="text-sm text-gray-600 font-semibold">
               {channelTitle}
             </p>
