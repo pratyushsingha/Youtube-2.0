@@ -23,7 +23,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="sticky top-0 bg-white flex justify-between py-4 px-5" onClick={togleSearch}>
+    <div className="sticky top-0 bg-white flex justify-between py-4 px-5">
       <Link to="/">
         <div className="flex space-x-3">
           <svg
@@ -56,7 +56,7 @@ const Navbar = () => {
           </h1>
         </div>
       </Link>
-      <div className="flex">
+      <div className="flex" onClick={togleSearch}>
         <input
           type="text"
           value={search}
@@ -74,7 +74,7 @@ const Navbar = () => {
           </div>
         </button>
       </div>
-      <div className={`${expandSearch?"hidden":"block"}`}>
+      <div className={`${expandSearch?"hidden":"block"} md:block`}>
         {!isAuthenticated ? (
           <button
             onClick={() => loginWithRedirect()}
