@@ -29,9 +29,9 @@ const VideoContainer = ({
               {channelTitle}
             </p>
             <span>•</span>
-            <p>{viewCount}</p>
+            <p className="text-gray-600">{viewCount}</p>
             <span>•</span>
-            <p>{publishedTimeText}</p>
+            <p className="text-gray-600">{publishedTimeText}</p>
           </div>
         </div>
         {/* for large screen */}
