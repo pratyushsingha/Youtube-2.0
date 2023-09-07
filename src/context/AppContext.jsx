@@ -3,6 +3,7 @@ import { useState, useEffect, createContext } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export const AppContext = createContext();
 
@@ -17,8 +18,12 @@ export default function AppContextProvider({ children }) {
   const [disLiked, setDisLiked] = useState(false);
   const [rVideos, setRVideos] = useState([]);
   const [currentVideoTitle, setCurrentVideoTitle] = useState("");
-  const [currentVideoChannel, setCurrentVideoChannel]=useState("");
-  const [currentVideoViews, setCurrentVideoViews]=useState("");
+  const [currentVideoChannel, setCurrentVideoChannel] = useState("");
+  const [currentVideoViews, setCurrentVideoViews] = useState("");
+  const [copied, setCopied] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
 
   // videos search
   const searchVideo = async () => {
@@ -31,7 +36,7 @@ export default function AppContextProvider({ children }) {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: "light",
       });
       return;
     }
@@ -149,7 +154,7 @@ export default function AppContextProvider({ children }) {
   const subscription = () => {
     if (subscribed === false) {
       setSubscribed(true);
-      toast.error("Subscription Removed😢", {
+      toast.success("Subscription Added😁", {
         position: "bottom-left",
         autoClose: 5000,
         hideProgressBar: false,
@@ -161,7 +166,7 @@ export default function AppContextProvider({ children }) {
       });
     } else {
       setSubscribed(false);
-      toast.success("Subscription Added😁", {
+      toast.error("Subscription Removed😢", {
         position: "bottom-left",
         autoClose: 5000,
         hideProgressBar: false,
@@ -184,7 +189,12 @@ export default function AppContextProvider({ children }) {
     }
   };
 
-  const videoDetails = async (videoId, videoTitle, videoChannel, videoViews) => {
+  const videoDetails = async (
+    videoId,
+    videoTitle,
+    videoChannel,
+    videoViews
+  ) => {
     const options = {
       method: "GET",
       url: "https://youtube-v3-alternative.p.rapidapi.com/video",
@@ -230,7 +240,49 @@ export default function AppContextProvider({ children }) {
     }
   };
 
- 
+  const handleSubscribe = () => {
+    console.log("clicked");
+    toast.error("Sign in to subscribe the channel", {
+      position: "bottom-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
+  const share = () => {
+    const el = document.createElement("input");
+    el.value = window.location.href;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand("copy");
+    document.body.removeChild(el);
+    setCopied(true);
+
+    toast.success("URL copied to clipboard😍", {
+      position: "bottom-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
+  const openModal = () => {
+    setModalIsOpen(true);
+    share();
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
 
   const value = {
     search,
@@ -262,7 +314,12 @@ export default function AppContextProvider({ children }) {
     currentVideoTitle,
     setCurrentVideoTitle,
     currentVideoChannel,
-    currentVideoViews
+    currentVideoViews,
+    handleSubscribe,
+    share,
+    openModal,
+    closeModal,
+    modalIsOpen,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

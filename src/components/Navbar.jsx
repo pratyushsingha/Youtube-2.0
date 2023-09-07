@@ -4,15 +4,13 @@ import { AppContext } from "../context/AppContext";
 import { Link } from "react-router-dom";
 import { BiUserCircle } from "react-icons/bi";
 import { AiOutlineSearch } from "react-icons/ai";
-import { useAuth0 } from "@auth0/auth0-react";
 
 const Navbar = () => {
   const [showLogoutBox, setShowLogoutBox] = useState(false);
   const [expandSearch, setExpandSearch] = useState(false);
 
-  const { changeHandler, submitHandler, search } = useContext(AppContext);
+  const { changeHandler, submitHandler, search, isAuthenticated, loginWithRedirect, logout, user } = useContext(AppContext);
 
-  const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
 
   const togleSearch = () => {
     setExpandSearch(!expandSearch);
