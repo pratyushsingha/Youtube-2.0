@@ -275,14 +275,6 @@ export default function AppContextProvider({ children }) {
     });
   };
 
-  const openModal = () => {
-    setModalIsOpen(true);
-    share();
-  };
-
-  const closeModal = () => {
-    setModalIsOpen(false);
-  };
 
   const value = {
     search,
@@ -317,9 +309,8 @@ export default function AppContextProvider({ children }) {
     currentVideoViews,
     handleSubscribe,
     share,
-    openModal,
-    closeModal,
     modalIsOpen,
+    setModalIsOpen
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

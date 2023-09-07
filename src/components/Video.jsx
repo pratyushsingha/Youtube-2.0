@@ -28,14 +28,32 @@ const Video = ({ title }) => {
     currentVideoChannel,
     handleSubscribe,
     share,
-    openModal,
-    closeModal,
     modalIsOpen,
+    setModalIsOpen
   } = useContext(AppContext);
 
   const { isAuthenticated } = useAuth0();
 
   const { vId } = useParams();
+
+  const openModal = () => {
+    setModalIsOpen(true);
+    navigator.clipboard.writeText(`https://www.youtube.com/watch?v=${vId}`);
+    toast.success("URL copied to clipboard😍", {
+      position: "bottom-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
 
   useEffect(() => {
     videoDetails(
@@ -96,8 +114,8 @@ const Video = ({ title }) => {
                 </button>
               )}
             </div>
-            <div className="flex flex-start md:justify-end self-center space-x-3">
-              <div className=" flex text-sm md:text-base bg-gray-400 hover:bg-gray-500 px-8 py-3 space-x-3 rounded-3xl">
+            <div className="flex flex-start md:justify-end self-center space-x-2 md:space-x-3">
+              <div className="flex text-sm md:text-base bg-gray-400 hover:bg-gray-500 px-6 md:px-8 py-3 space-x-3 rounded-3xl">
                 <button className="text-xl">
                   <AiOutlineLike />
                 </button>
@@ -108,14 +126,14 @@ const Video = ({ title }) => {
               </div>
               <div
                 onClick={share}
-                className="flex text-sm md:text-base bg-gray-400 hover:bg-gray-500 px-8 py-3 space-x-3 rounded-3xl"
+                className="flex text-sm md:text-base bg-gray-400 hover:bg-gray-500 px-6 md:px-8 py-3 space-x-3 rounded-3xl"
               >
                 <button className="text-xl flex space-x-2">
                   <PiShareFatLight />
                   <p className="self-center text-sm font-semibold">Share</p>
                 </button>
               </div>
-              <div className="flex text-sm md:text-base bg-gray-400 hover:bg-gray-500 px-8 py-3 space-x-3 rounded-3xl">
+              <div className="flex text-sm md:text-base bg-gray-400 hover:bg-gray-500 px-6 md:px-8 py-3 space-x-3 rounded-3xl">
                 <button onClick={openModal} className="text-xl flex space-x-2">
                   <LiaDownloadSolid />
                   <p className="self-center text-sm font-semibold">Download</p>
@@ -126,7 +144,7 @@ const Video = ({ title }) => {
                   contentLabel="Website Modal"
                 >
                   <button className="my-3 text-xl" onClick={closeModal}>
-                    <RxCross1/>
+                    <RxCross1 />
                   </button>
                   <iframe
                     title="External Website"
