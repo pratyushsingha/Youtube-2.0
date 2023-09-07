@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 
 import { useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -9,6 +9,7 @@ import { AiOutlineDislike } from "react-icons/ai";
 import { PiShareFatLight } from "react-icons/pi";
 import { LiaDownloadSolid } from "react-icons/lia";
 import { AiFillLike } from "react-icons/ai";
+import { AiFillDislike } from "react-icons/ai";
 import { RxCross1 } from "react-icons/rx";
 import Modal from "react-modal";
 
@@ -29,7 +30,8 @@ const Video = ({ title }) => {
     handleSubscribe,
     share,
     modalIsOpen,
-    setModalIsOpen
+    setModalIsOpen,
+    liked,
   } = useContext(AppContext);
 
   const { isAuthenticated } = useAuth0();
@@ -115,25 +117,25 @@ const Video = ({ title }) => {
               )}
             </div>
             <div className="flex flex-start md:justify-end self-center space-x-2 md:space-x-3">
-              <div className="flex text-sm md:text-base bg-gray-400 hover:bg-gray-500 px-6 md:px-8 py-3 space-x-3 rounded-3xl">
+              <div className="flex text-sm md:text-base bg-gray-400 hover:bg-gray-500 px-5 md:px-8 py-3 space-x-3 rounded-3xl">
                 <button className="text-xl">
-                  <AiOutlineLike />
+                  {liked ? <AiOutlineLike /> : <AiFillLike />}
                 </button>
                 <div class="border border-gray-500 h-5"></div>
                 <button className="text-xl">
-                  <AiOutlineDislike />
+                  {!liked? <AiOutlineDislike/>: <AiFillDislike/> }
                 </button>
               </div>
               <div
                 onClick={share}
-                className="flex text-sm md:text-base bg-gray-400 hover:bg-gray-500 px-6 md:px-8 py-3 space-x-3 rounded-3xl"
+                className="flex mx-2 text-sm md:text-base bg-gray-400 hover:bg-gray-500 px-5 md:px-8 py-3 space-x-3 rounded-3xl"
               >
                 <button className="text-xl flex space-x-2">
                   <PiShareFatLight />
                   <p className="self-center text-sm font-semibold">Share</p>
                 </button>
               </div>
-              <div className="flex text-sm md:text-base bg-gray-400 hover:bg-gray-500 px-6 md:px-8 py-3 space-x-3 rounded-3xl">
+              <div className="flex text-sm md:text-base bg-gray-400 hover:bg-gray-500 px-5 md:px-8 py-3 space-x-3 rounded-3xl">
                 <button onClick={openModal} className="text-xl flex space-x-2">
                   <LiaDownloadSolid />
                   <p className="self-center text-sm font-semibold">Download</p>

@@ -3,7 +3,6 @@ import { useState, useEffect, createContext } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useAuth0 } from "@auth0/auth0-react";
 
 export const AppContext = createContext();
 
@@ -23,7 +22,6 @@ export default function AppContextProvider({ children }) {
   const [copied, setCopied] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
 
   // videos search
   const searchVideo = async () => {
@@ -310,7 +308,8 @@ export default function AppContextProvider({ children }) {
     handleSubscribe,
     share,
     modalIsOpen,
-    setModalIsOpen
+    setModalIsOpen,
+    copied
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
