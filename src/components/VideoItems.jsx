@@ -9,7 +9,7 @@ const VideoItems = ({ src, title, channel, date, id }) => {
         <div className="max-w-sm rounded-lg overflow-hidden shadow-lg">
           <img className="w-full rounded-lg" src={src} width="100%" alt={title} />
           <div className="px-6 py-4">
-            <div className="font-bold text-xl mb-2">
+            <div className="font-semibold text-md mb-2">
               {title.slice(0, 57)}...
             </div>
             <p className="text-gray-700 text-base">{channel}</p>
