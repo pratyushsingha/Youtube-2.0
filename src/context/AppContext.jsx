@@ -22,7 +22,6 @@ export default function AppContextProvider({ children }) {
   const [copied, setCopied] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-
   // videos search
   const searchVideo = async () => {
     if (search.trim() === "") {
@@ -152,7 +151,7 @@ export default function AppContextProvider({ children }) {
   const subscription = () => {
     if (subscribed === false) {
       setSubscribed(true);
-      toast.success("Subscription Added😁", {
+      toast.error("Subscription Removed😢", {
         position: "bottom-left",
         autoClose: 5000,
         hideProgressBar: false,
@@ -164,7 +163,8 @@ export default function AppContextProvider({ children }) {
       });
     } else {
       setSubscribed(false);
-      toast.error("Subscription Removed😢", {
+
+      toast.success("Subscription Added😁", {
         position: "bottom-left",
         autoClose: 5000,
         hideProgressBar: false,
@@ -273,7 +273,6 @@ export default function AppContextProvider({ children }) {
     });
   };
 
-
   const value = {
     search,
     setSearch,
@@ -309,7 +308,7 @@ export default function AppContextProvider({ children }) {
     share,
     modalIsOpen,
     setModalIsOpen,
-    copied
+    copied,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

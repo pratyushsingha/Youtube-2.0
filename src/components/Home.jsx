@@ -12,6 +12,7 @@ const Home = () => {
         <div className='flex flex-col md:flex-row md:justify-between md:mx-10'>
             <div className='overflow-x-auto md:overflow-y-auto md:h-screen md:scrollbar md:scrollbar-thin scrollbar-thumb-gray-300'>
                 <Sidebar />
+            {/* <div className='border border-gray-500 h-80'></div> */}
             </div>
             {loading && <Spinner />}
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
