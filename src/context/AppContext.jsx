@@ -99,6 +99,7 @@ export default function AppContextProvider({ children }) {
 
     try {
       const response = await axios.request(options);
+      console.log(response.data.data)
       setData(response.data.data);
       setLoading(false);
     } catch (error) {

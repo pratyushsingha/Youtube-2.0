@@ -25,6 +25,7 @@ const Home = () => {
                             date={item.publishedText}
                             id={item.videoId}
                             desc={item.description}
+                            viewCount={item.viewCount}
                         />
                     </div>
                 )))}
