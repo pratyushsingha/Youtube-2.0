@@ -63,7 +63,7 @@ const Navbar = () => {
           value={search}
           onChange={changeHandler}
           className={`${
-            expandSearch ? "w-12/12" : "w-20"
+            expandSearch ? "w-10/12" : "w-20"
           } md:w-96 border focus:border-blue-700 px-4 py-2 border rounded-l-3xl`}
           placeholder="search"
         />
