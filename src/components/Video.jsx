@@ -15,8 +15,9 @@ import Modal from "react-modal";
 
 import { AppContext } from "../context/AppContext";
 import VideoContainer from "./VideoContainer";
+import Comments from "./Comments";
 
-const Video = ({ title }) => {
+const Video = ({title }) => {
   const {
     vDetails,
     subscribed,
@@ -32,6 +33,10 @@ const Video = ({ title }) => {
     modalIsOpen,
     setModalIsOpen,
     liked,
+    videoLike,
+    handleLiked,
+    vComments,
+    comments,
   } = useContext(AppContext);
 
   const { isAuthenticated } = useAuth0();
@@ -64,6 +69,7 @@ const Video = ({ title }) => {
       currentVideoChannel,
       currentVideoViews
     );
+    comments(vId);
     relatedVideos(vId);
   }, []);
 
@@ -118,13 +124,27 @@ const Video = ({ title }) => {
             </div>
             <div className="flex flex-start md:justify-end self-center space-x-2 md:space-x-3">
               <div className="flex text-sm md:text-base bg-gray-400 hover:bg-gray-500 px-5 md:px-8 py-3 space-x-3 rounded-3xl">
-                <button className="text-xl">
-                  {liked ? <AiOutlineLike /> : <AiFillLike />}
-                </button>
-                <div class="border border-gray-500 h-5"></div>
-                <button className="text-xl">
-                  {!liked? <AiOutlineDislike/>: <AiFillDislike/> }
-                </button>
+                {isAuthenticated ? (
+                  <>
+                    <button className="text-xl" onClick={videoLike}>
+                      {liked === false ? <AiOutlineLike /> : <AiFillLike />}
+                    </button>
+                    <div class="border border-gray-500 h-5"></div>
+                    <button className="text-xl" onClick={videoLike}>
+                      {!liked ? <AiFillDislike /> : <AiOutlineDislike />}
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button className="text-xl" onClick={handleLiked}>
+                      <AiOutlineLike />
+                    </button>
+                    <div class="border border-gray-500 h-5"></div>
+                    <button className="text-xl" onClick={handleLiked}>
+                      <AiOutlineDislike />
+                    </button>
+                  </>
+                )}
               </div>
               <div
                 onClick={share}
@@ -159,8 +179,19 @@ const Video = ({ title }) => {
             </div>
           </div>
         </div>
+        {vComments.map((vComment) => (
+          <Comments 
+            key={vComment.commentId}
+            authorDisplayName={vComment.authorDisplayName}
+            authorProfileImageUrl={vComment.authorProfileImageUrl[0].url}
+            textDisplay={vComment.textDisplay}
+            publishedTimeText={vComment.publishedTimeText}
+            likesCount={vComment.likesCount}
+            replyCount={vComment.replyCount}
+          />
+        ))}
       </div>
-      <div className="flex flex-col space-y-2">
+      <div className="flex flex-col space-y-2 ">
         {rVideos.map((rvideo, index) => (
           <div
             key={index}
@@ -181,7 +212,7 @@ const Video = ({ title }) => {
               thumbnail={rvideo.thumbnail[0].url}
               channelTitle={rvideo.channelTitle}
               viewCount={rvideo.viewCount}
-              channelThumbnail={rvideo.authorThumbnail[0].url}
+              // channelThumbnail={rvideo.authorThumbnail[0].url}
               publishedTimeText={rvideo.publishedTimeText}
             />
           </div>

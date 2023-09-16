@@ -19,7 +19,11 @@ const VideoContainer = ({
           <div className="flex space-x-2">
             <img
               className="w-10 h-10 rounded-full mt-2"
-              src={channelThumbnail}
+              src={
+                channelThumbnail
+                  ? channelThumbnail
+                  : "https://i.postimg.cc/Bb5v690D/6769264-60111.jpg"
+              }
               alt=""
             />
             <p className="font-bold text-md">{title.slice(0, 56)} ...</p>

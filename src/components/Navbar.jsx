@@ -10,10 +10,9 @@ const Navbar = () => {
   const [showLogoutBox, setShowLogoutBox] = useState(false);
   const [expandSearch, setExpandSearch] = useState(false);
 
-  const { changeHandler, submitHandler, search} = useContext(AppContext);
+  const { changeHandler, submitHandler, search } = useContext(AppContext);
 
   const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
-
 
   const togleSearch = () => {
     setExpandSearch(!expandSearch);
@@ -57,7 +56,7 @@ const Navbar = () => {
           </h1>
         </div>
       </Link>
-      <div className="flex" onClick={togleSearch}>
+      <form onSubmit={submitHandler} className="flex" onClick={togleSearch}>
         <input
           type="text"
           value={search}
@@ -67,15 +66,13 @@ const Navbar = () => {
           } md:w-96 border focus:border-blue-700 px-4 py-2 border rounded-l-3xl`}
           placeholder="search"
         />
-        <button
-          onClick={submitHandler}
-        >
+        <button onClick={submitHandler}>
           <div className="bg-gray-300 rounded-r-3xl self-center px-6 py-3.5">
             <AiOutlineSearch className="w-5 h-5" />
           </div>
         </button>
-      </div>
-      <div className={`${expandSearch?"hidden":"block"} md:block`}>
+      </form>
+      <div className={`${expandSearch ? "hidden" : "block"} md:block`}>
         {!isAuthenticated ? (
           <button
             onClick={() => loginWithRedirect()}

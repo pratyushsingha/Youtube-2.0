@@ -21,6 +21,7 @@ export default function AppContextProvider({ children }) {
   const [currentVideoViews, setCurrentVideoViews] = useState("");
   const [copied, setCopied] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [vComments, setVComments] = useState([]);
 
   // videos search
   const searchVideo = async () => {
@@ -73,14 +74,14 @@ export default function AppContextProvider({ children }) {
     }
   };
 
-  function changeHandler(e) {
+  const changeHandler = (e) => {
     setSearch(e.target.value);
-  }
+  };
 
-  function submitHandler(e) {
+  const submitHandler = (e) => {
     e.preventDefault();
     searchVideo();
-  }
+  };
 
   const suggestedVideo = async () => {
     setLoading(true);
@@ -99,7 +100,7 @@ export default function AppContextProvider({ children }) {
 
     try {
       const response = await axios.request(options);
-      console.log(response.data.data)
+      console.log(response.data.data);
       setData(response.data.data);
       setLoading(false);
     } catch (error) {
@@ -181,10 +182,19 @@ export default function AppContextProvider({ children }) {
   const videoLike = () => {
     if (liked === false) {
       setLiked(true);
-      setDisLiked(false);
+      toast.success("Added to Liked videos😁", {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     } else {
       setLiked(false);
-      setDisLiked(true);
+      console.log("like set false");
     }
   };
 
@@ -240,8 +250,21 @@ export default function AppContextProvider({ children }) {
   };
 
   const handleSubscribe = () => {
-    console.log("clicked");
+    // console.log("clicked");
     toast.error("Sign in to subscribe the channel", {
+      position: "bottom-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+  const handleLiked = () => {
+    // console.log("clicked");
+    toast.error("Sign in to Like the video", {
       position: "bottom-left",
       autoClose: 5000,
       hideProgressBar: false,
@@ -272,6 +295,36 @@ export default function AppContextProvider({ children }) {
       progress: undefined,
       theme: "light",
     });
+  };
+
+  const comments = async (videoId) => {
+    const options = {
+      method: "GET",
+      url: "https://youtube-v3-alternative.p.rapidapi.com/comments",
+      params: { id: videoId },
+      headers: {
+        "X-RapidAPI-Key": process.env.REACT_APP_API_KEY,
+        "X-RapidAPI-Host": "youtube-v3-alternative.p.rapidapi.com",
+      },
+    };
+
+    try {
+      const response = await axios.request(options);
+      console.log(response.data.data);
+      setVComments(response.data.data);
+    } catch (error) {
+      console.error(error);
+      toast.error("Unable to fetch comments 😢", {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
   };
 
   const value = {
@@ -310,6 +363,10 @@ export default function AppContextProvider({ children }) {
     modalIsOpen,
     setModalIsOpen,
     copied,
+    comments,
+    vComments,
+    setVComments,
+    handleLiked,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
